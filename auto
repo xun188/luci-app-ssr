@@ -1,0 +1,31 @@
+cd /home/jiang/openwrt/
+./scripts/feeds update
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+rm -rf feeds/packages/net/smartdns/
+rm -rf feeds/luci/applications/luci-app-smartdns
+
+cd /home/jiang/luci-app-smartdns
+git pull
+cd /home/jiang/smartdns
+git pull
+cd /home/jiang/luci-app-alist
+git pull
+cd /home/jiang/helloworld
+git pull
+git checkout a2018397be088270fa4c48d42d8711f194ac1a11
+rm -rf /home/jiang/helloworld/xray-core/
+cp -R /home/jiang/bak/xray-core/ /home/jiang/helloworld/
+
+cp /home/jiang/bak/ssr-switch /home/jiang/helloworld/luci-app-ssr-plus/root/usr/bin/
+cp /home/jiang/bak/mac80211.sh /home/jiang/openwrt/package/kernel/mac80211/files/lib/wifi/mac80211.sh 
+
+mv /home/jiang/luci-app-smartdns /home/jiang/openwrt/feeds/luci/applications/
+mv /home/jiang/smartdns/ /home/jiang/openwrt/feeds/packages/net/
+mv /home/jiang/luci-app-alist /home/jiang/openwrt/package/
+
+mv /home/jiang/helloworld/ /home/jiang/openwrt/package/
+cp /home/jiang/config /home/jiang/openwrt/.config
+./scripts/feeds install -a
+make menuconfig
+
