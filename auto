@@ -13,7 +13,6 @@ cd /home/jiang/luci-app-alist
 git pull
 cd /home/jiang/helloworld
 git pull
-git checkout a2018397be088270fa4c48d42d8711f194ac1a11
 rm -rf /home/jiang/helloworld/xray-core/
 cp -R /home/jiang/bak/xray-core/ /home/jiang/helloworld/
 
